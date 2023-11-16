@@ -1,0 +1,27 @@
+---
+optimize: false
+prior_split: 0.
+alpha: 0.1
+alpha_hat: 0.05
+delta: 0.05
+
+dl_kwargs:
+  batch_size: 100
+
+optim:
+  cuda: ${cuda}
+  lr: 1e-3
+  lr_decay: 1.
+  max_iter: 2000
+  max_outer_iter: 7
+  term_threshold: 1e-4
+  alg: aug_lag
+
+wrapper:
+  _target_: ???
+  score_function: ???
+  alpha_hat: ${..alpha_hat}
+  alpha: ${..alpha}
+  delta: ${..delta}
+  optimize_model: ${...optimize_model}
+  optimize_score_function: ${...optimize_score_function}

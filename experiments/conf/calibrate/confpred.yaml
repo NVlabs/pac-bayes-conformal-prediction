@@ -1,0 +1,9 @@
+---
+defaults:
+  - base
+
+name: confpred
+
+wrapper:
+  _target_: confpred.predictors.StandardConfPred
+  score_function: ${fixed_score_function}

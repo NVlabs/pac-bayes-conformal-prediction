@@ -1,0 +1,8 @@
+---
+_target_: confpred_eval.models.bnn.BNN
+model:
+  _target_: confpred_eval.models.LeNet
+  num_classes: ${data.output_dim}
+loglikelihood: ${data.loss}
+N: ${data.split.train.N}
+model_std_scale: 1e0

@@ -1,0 +1,3 @@
+---
+_target_: confpred_eval.models.LeNet
+num_classes: ${data.output_dim}

@@ -1,0 +1,10 @@
+---
+optim_class: adam
+lr: 2e-2
+epochs: 500
+term_threshold: 1e-3
+cuda: ${cuda}
+
+dl_kwargs:
+  batch_size: 100
+  shuffle: true

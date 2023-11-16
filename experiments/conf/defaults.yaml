@@ -1,0 +1,26 @@
+---
+defaults:
+- _self_
+- model: mlp
+- train: default
+- calibrate: confpred
+- experiment: toy
+- optional calibrate_experiment: ${calibrate}_${experiment}
+- override hydra/launcher: joblib
+
+cuda: true
+chkpt_path: models/
+results_path: results/
+
+seed: 2023
+
+hydra:
+  job:
+    chdir: false
+    config:
+      override_dirname:
+          exclude_keys:
+            - cuda
+            - experiment
+  launcher:
+    n_jobs: 5

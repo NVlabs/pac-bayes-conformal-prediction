@@ -1,0 +1,7 @@
+---
+_target_: confpred_eval.models.MLP
+input_dim: ${data.input_dim}
+output_dim: ${data.output_dim}
+n_hidden: 2
+layer_width: 64
+activation: relu

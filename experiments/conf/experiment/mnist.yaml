@@ -1,0 +1,54 @@
+# @package _global_
+defaults:
+ - override /model: lenet
+
+name: mnist
+
+# data source and dimensions
+data:
+  dataset: 
+    _target_: confpred_eval.datasets.MNIST
+  input_dim: 28,28,1
+  output_dim: 10
+
+  loss:
+    _target_: torch.nn.CrossEntropyLoss
+
+  # split sizes and seeds
+  split:
+    train:
+      N: 7000
+      seed: ${seed}
+    val:
+      N: 5000
+      seed: ${seed} # val and test must have same seed
+    test:
+      N: 1000
+      seed: ${seed}
+
+# are we optimizing model and / or score function
+optimize_model: true
+model_prior_scale: 1e-2
+
+optimize_score_function: false
+score_function_prior_scale: 1e-9
+
+fixed_score_function:
+  _target_: confpred.score_functions.ThresholdScoreFunction
+
+learnable_score_function:
+  _target_: confpred.score_functions.ThresholdScoreFunction
+
+  # _target_: confpred.score_functions.AdjustedThresholdScoreFunction
+  # adjustment_network:
+  #   _target_: torch.nn.Linear
+  #   in_features: 10
+  #   out_features: 10
+
+train:
+  lr: 2e-4
+  term_threshold: 1e-5
+  epochs: 2000
+
+calibrate:
+  alpha_hat: 0.07

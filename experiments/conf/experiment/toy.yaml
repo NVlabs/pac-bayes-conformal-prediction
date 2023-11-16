@@ -1,0 +1,44 @@
+# @package _global_
+name: toy
+
+# data source and dimensions
+data:
+  dataset: 
+    _target_: confpred_eval.datasets.ToyDataset
+  input_dim: 1
+  output_dim: 1
+
+  loss:
+    _target_: torch.nn.MSELoss
+
+  # split sizes and seeds
+  split:
+    train:
+      N: 100
+      seed: 1
+    val:
+      N: 5000
+      seed: 2
+    test:
+      N: 5000
+      seed: 3
+
+# are we optimizing model and / or score function
+optimize_model: false
+model_prior_scale: 1e-9
+
+optimize_score_function: true
+score_function_prior_scale: 2e-2
+
+fixed_score_function:
+  _target_: confpred.score_functions.EuclideanDistanceScoreFunction
+
+learnable_score_function:
+  _target_: confpred.score_functions.HeteroskedasticScoreFunction
+  unc_network:
+    _target_: confpred_eval.models.MLP
+    input_dim: ${data.input_dim}
+    output_dim: 1
+    layer_width: 128
+    n_hidden: 2
+    activation: tanh

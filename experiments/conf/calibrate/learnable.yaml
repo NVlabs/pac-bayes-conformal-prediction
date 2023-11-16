@@ -1,0 +1,11 @@
+---
+defaults:
+  - confpred
+
+name: learnable
+
+optimize: true
+prior_split: 0.5
+
+wrapper:
+  score_function: ${learnable_score_function}  

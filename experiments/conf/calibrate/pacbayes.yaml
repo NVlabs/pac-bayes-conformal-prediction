@@ -1,0 +1,18 @@
+---
+defaults:
+  - confpred
+
+name: pacbayes
+
+optimize: true
+prior_split: 0.2
+
+wrapper:
+  _target_: confpred.predictors.PACBayesConfPred
+  score_function: ${learnable_score_function}
+  num_samples: 30
+  model_std_scale: ${model_prior_scale}
+  score_std_scale: ${score_function_prior_scale}
+  posterior_scale_factor: 1.0
+  optimize_bound: false
+  prior_opt: erm
